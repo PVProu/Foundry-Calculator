@@ -1,66 +1,101 @@
-## Foundry
+# Foundry Calculator
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+**FirstFoundryRepo** is a Solidity-based calculator project developed using [Foundry](https://book.getfoundry.sh/), a blazing fast, portable and modular toolkit for Ethereum application development.
 
-Foundry consists of:
+## 🧮 Smart Contract: Calculator
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+The `Calculator` smart contract implements basic arithmetic operations and is initialized with:
 
-## Documentation
+- A configurable starting result.
+- An admin address who is exclusively allowed to perform division operations.
 
-https://book.getfoundry.sh/
+### Features
 
-## Usage
+- ✅ **Addition**
+- ✅ **Subtraction**
+- ✅ **Multiplication**
+- ✅ **Division** (admin-only)
+- 🔒 **Access Control** via `onlyAdmin` modifier
+- ⚠️ **Revert logic** for division by zero and overflow protection
+- 🧾 **Event Logging** for all operations
 
-### Build
+---
 
-```shell
-$ forge build
+## 🧪 Test Suite: CalculatorTest
+
+Using Foundry’s `forge-std/Test.sol`, the contract includes comprehensive test coverage:
+
+### ✅ Unit Tests
+- Initial value verification
+- Correctness of all arithmetic operations
+- Permission checks for admin-only access
+
+### 🔄 Fuzz Testing
+- Randomized division tests (fuzzing) using `forge test`
+
+### ⚠️ Negative Tests
+- Division by zero
+- Unauthorized access to division
+- Overflow scenarios
+
+---
+
+## 📁 Project Structure
+
+```
+FirstFoundryRepo/
+├── lib/                  # Dependencies (forge-std, etc.)
+├── src/
+│   └── Calculator.sol    # Main smart contract
+├── test/
+│   └── CalculatorTest.t.sol # Test suite for Calculator
+├── .gitignore
+├── foundry.toml
+└── README.md
 ```
 
-### Test
+---
 
-```shell
-$ forge test
+## 🚀 Getting Started
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/PVProu/Foundry-Calculator.git
+cd Foundry-Calculator
 ```
 
-### Format
+### 2. Install Foundry (if not already)
 
-```shell
-$ forge fmt
+```bash
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
 ```
 
-### Gas Snapshots
+### 3. Run tests
 
-```shell
-$ forge snapshot
+```bash
+forge test
+forge test -vvvv
 ```
 
-### Anvil
+---
 
-```shell
-$ anvil
-```
+## 🔐 Security & Access
 
-### Deploy
+The `division()` function is restricted to the admin only. All unauthorized attempts are reverted using `vm.expectRevert()` in the test suite.
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+---
 
-### Cast
+## 👨‍💻 Author
 
-```shell
-$ cast <subcommand>
-```
+**Pol Vela Prous**  
+GitHub: [PVProu](https://github.com/PVProu)  
+Email: polvelaprous@gmail.com  
 
-### Help
+---
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE-MIT).
+
